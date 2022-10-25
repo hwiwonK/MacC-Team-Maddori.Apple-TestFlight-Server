@@ -24,23 +24,23 @@ router.get('/keywords', async function(req, res, next) {
 });
 
 //css 등록
-// router.post('/', async function(req, res, next) {
-//   console.log("css 등록");
-
-//   console.log(req.body.query);
-
-//   var fileList = await file.findAll({
-//     where: {
-//       userId: req.session.passport.user
-//     },
-//     include: [{
-//       model: keyword, 
-//       where: {
-//         keywordname: req.body.query
-//       }
-//     }]
-//   });
-// });
+router.post('/', async function(req, res, next) {
+    console.log("css 등록");
+    const cssContent = req.body;
+    console.log(cssContent);
+    
+    try {
+        const createdCss = await css.create(cssContent);
+        res.status(201).send(createdCss);
+        console.log("css 등록 성공");
+        console.log(createdCss);
+    }
+    catch (e) {
+        res.status(400).send(e);
+        console.log("css 등록 실패");
+        console.log(e);
+    }
+});
 
 
 module.exports = router;
