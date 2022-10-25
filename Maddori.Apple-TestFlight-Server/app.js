@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const { sequelize } = require('./models');
+const models = require("./models/index.js");
 
 sequelize.sync({ force: false })
 .then(() => {
@@ -14,5 +15,32 @@ sequelize.sync({ force: false })
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });
+
+// models.css.create({
+//     from_name: 'test_from',
+//     to_name: 'test_to',
+//     type: 'Stop',
+//     keyword: 'test_keyword',
+//     content: 'test_content',
+//     start_content: 'test_start'
+// })
+// .then(() => {
+//     console.log("css data is created!");
+// })
+// .catch((err) => {
+//     console.log("failed to create css data");
+//     console.log(err);
+// });
+
+models.css.findAll({
+    attributes: ['keyword']
+})
+.then((result) => {
+    console.log(result);
+})
+.catch((err) => {
+    console.log("failed to get keywords");
+    console.log(err);
+})
   
 module.exports = app;
