@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bin/www"
+    "start": "pm2 start ./bin/www"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "express": "^4.18.2",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.20",
+    "pm2": "^5.2.2",
     "sequelize": "^6.25.3",
     "sequelize-cli": "^6.5.1"
   }
