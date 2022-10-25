@@ -3,6 +3,8 @@ const app = express();
 const { sequelize } = require('./models');
 const models = require("./models/index.js");
 
+app.use(express.json());
+
 sequelize.sync({ force: false })
 .then(() => {
     console.log('데이터베이스 연결 성공');
@@ -15,6 +17,8 @@ sequelize.sync({ force: false })
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });
+
+app.use('/css', require('./routes/css'));
 
 // models.css.create({
 //     from_name: 'test_from',
@@ -32,15 +36,17 @@ app.get('/', (req, res) => {
 //     console.log(err);
 // });
 
-models.css.findAll({
-    attributes: ['keyword']
-})
-.then((result) => {
-    console.log(result);
-})
-.catch((err) => {
-    console.log("failed to get keywords");
-    console.log(err);
-})
+
+
+// models.css.findAll({
+//     attributes: ['keyword']
+// })
+// .then((result) => {
+//     console.log(result);
+// })
+// .catch((err) => {
+//     console.log("failed to get keywords");
+//     console.log(err);
+// })
   
 module.exports = app;
