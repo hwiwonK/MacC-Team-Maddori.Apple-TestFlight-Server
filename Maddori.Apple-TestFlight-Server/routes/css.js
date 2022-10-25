@@ -3,8 +3,6 @@ const router = express.Router();
 
 const {css} = require('../models');
 
-
-
 //키워드 정보 가져오기
 router.get('/keywords', async function(req, res, next) {
     console.log("키워드 가져오기");
@@ -13,11 +11,15 @@ router.get('/keywords', async function(req, res, next) {
             attributes: ['keyword'],
             raw:true
         });
-        res.status(200).send(keywordList);
+        //배열로 바꾸기
+        const result = {
+            keywords : keywordList.map((data) => data.keyword)
+        }
+        res.status(200).send(result);
         console.log("키워드 가져오기 성공");
-        console.log(keywordList);
+        console.log(result);
     } catch (e) {
-        res.status(400).send(e);
+        res.status(500).send(e);
         console.log("키워드 가져오기 실패");
         console.log(e);
     }
@@ -36,7 +38,7 @@ router.post('/', async function(req, res, next) {
         console.log(createdCss);
     }
     catch (e) {
-        res.status(400).send(e);
+        res.status(500).send(e);
         console.log("css 등록 실패");
         console.log(e);
     }
