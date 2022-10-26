@@ -23,7 +23,7 @@ router.get('/keywords', async function(req, res, next) {
 //css 등록
 router.post('/', async function(req, res, next) {
     const cssContent = req.body;
-    
+    //console.log(cssContent);
     try {
         const createdCss = await css.create(cssContent);
         res.status(201).send(createdCss);
