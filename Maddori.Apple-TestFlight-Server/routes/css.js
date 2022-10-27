@@ -10,6 +10,10 @@ router.get('/keywords', async function(req, res, next) {
             attributes: ['keyword'],
             raw:true
         });
+
+        //reverse
+        keywordList.reverse();
+
         //배열로 바꾸기
         const result = {
             keywords : keywordList.map((data) => data.keyword)
